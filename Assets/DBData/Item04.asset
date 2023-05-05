@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f35b327aa47f418699df398788791e47, type: 3}
   m_Name: Item04
   m_EditorClassIdentifier: 
-  itemName: 
-  itemSprite: {fileID: 0}
-  itemValueMax: 0
+  itemName: Item04
+  itemSprite: {fileID: 21300000, guid: 68ab35216a1869749a95131f61a964cf, type: 3}
+  itemValueMax: 1000
   itemValueMin: 0
   itemModelPrefab: {fileID: 0}
