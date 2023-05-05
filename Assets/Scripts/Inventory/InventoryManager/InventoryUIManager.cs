@@ -34,13 +34,13 @@ namespace Inventory.InventoryManager
             inventory = player.GetComponent<GamerObjectProperties>().Inventory;
             
             // 增加委托
-            InventoryObject.Inventory.UpdateUI += UpdateItem;
+            inventory.UpdateUI += UpdateItem;
         }
 
         private void OnDisable()
         {
             // 移除委托
-            InventoryObject.Inventory.UpdateUI -= UpdateItem;
+            inventory.UpdateUI -= UpdateItem;
         }
 
         // -----------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ namespace Inventory.InventoryObject
         /// <summary>
         /// 用于更新背包 UI 的事件
         /// </summary>
-        public static event InventoryUI UpdateUI;
+        public event InventoryUI UpdateUI;
 
         // -----------------------------------------------------------------------------------
 
