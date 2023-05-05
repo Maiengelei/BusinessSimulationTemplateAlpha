@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a90d21bca8ebf9042b143cab0c0c9529, type: 3}
   m_Name: MyBag
   m_EditorClassIdentifier: 
-  items: []
+  inventoryLenght: 18
+  isEquippedValue: 3
+  isEquippedOnValue: 0
+  equippedSum: 0
+  itemList: []
