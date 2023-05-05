@@ -28,6 +28,11 @@ namespace Inventory.InventoryManager
 
         private void OnEnable()
         {
+            // 通过 Tag 获取玩家对象
+            GameObject player = GameObject.FindWithTag("Player");
+            // 获取到玩家的背包
+            inventory = player.GetComponent<GamerObjectProperties>().Inventory;
+            
             // 增加委托
             InventoryObject.Inventory.UpdateUI += UpdateItem;
         }
