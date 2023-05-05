@@ -9,7 +9,7 @@ namespace Inventory.InventoryManager
         /// <summary>
         /// 对应背包
         /// </summary>
-        public InventoryObject.Inventory inventory;
+        private InventoryObject.Inventory _inventory;
 
         /// <summary>
         /// 点击的格子ID
@@ -24,7 +24,7 @@ namespace Inventory.InventoryManager
         /// <summary>
         /// 格子父类
         /// </summary>
-        private Transform _grid;
+        [SerializeField] private Transform grid;
 
         // -----------------------------------------------------------------------------------
 
@@ -33,16 +33,22 @@ namespace Inventory.InventoryManager
             // 通过 Tag 获取玩家对象
             GameObject player = GameObject.FindWithTag("Player");
             // 获取到玩家的背包
-            inventory = player.GetComponent<GamerObjectProperties>().Inventory;
-            
+            _inventory = player.GetComponent<GamerObjectProperties>().Inventory;
+
             // 增加委托
-            inventory.UpdateUI += UpdateItem;
+            _inventory.UpdateUI += UpdateItem;
+            
+            // 打开界面时自动刷新
+            UpdateItem();
         }
 
         private void OnDisable()
         {
             // 移除委托
-            inventory.UpdateUI -= UpdateItem;
+            _inventory.UpdateUI -= UpdateItem;
+            
+            CheckSlotFrame(_slotListID, false);
+            _slotListID = -1;
         }
 
         // -----------------------------------------------------------------------------------
@@ -53,37 +59,54 @@ namespace Inventory.InventoryManager
         private void UpdateItem()
         {
             // 将所有的子物体取消激活
-            for (int i = 0; i < _grid.childCount; i++)
+            for (int i = 0; i < grid.childCount; i++)
             {
-                for (int j = 0; j < _grid.GetChild(i).childCount; j++)
+                for (int j = 0; j < grid.GetChild(i).childCount; j++)
                 {
-                    _grid.GetChild(i).GetChild(j).gameObject.SetActive(false);
+                    grid.GetChild(i).GetChild(j).gameObject.SetActive(false);
                 }
             }
 
-            for (int i = 0; i < inventory.itemList.Count; i++)
+            for (int i = 0; i < _inventory.itemList.Count; i++)
             {
                 // 获取指定格子的数据
-                _slotData = _grid.GetChild(i).GetComponent<SlotData>();
+                _slotData = grid.GetChild(i).GetComponent<SlotData>();
 
                 // 增加图标
                 _slotData.itemImage.sprite =
-                    inventory.itemList[i].Item.itemSprite;
+                    _inventory.itemList[i].Item.itemSprite;
 
                 // 增加数值
                 _slotData.itemValue.text =
-                    inventory.itemList[i].Attributes.ItemValue.ToString();
+                    _inventory.itemList[i].Attributes.ItemValue.ToString();
 
                 // 判断是否为已装备道具
-                if (inventory.itemList[i].Attributes.IsEquipped)
+                if (_inventory.itemList[i].Attributes.IsEquipped)
                 {
                     // 启用 已装备 图标
-                    _grid.GetChild(i).Find("IsEquipped").gameObject.SetActive(true);
+                    grid.GetChild(i).Find("IsEquipped").gameObject.SetActive(true);
                 }
 
                 // 启用这个格子
-                _grid.GetChild(i).Find("Item").gameObject.SetActive(true);
+                grid.GetChild(i).Find("Item").gameObject.SetActive(true);
             }
+        }
+        
+        /// <summary>
+        /// 检查点击的格子状态，修改点击状态
+        /// </summary>
+        /// <param name="gridSlotConst"></param>
+        public void CheckSlot(int gridSlotConst)
+        {
+            // 检查上一个物品栏，如果正在高亮则取消高亮上一个物品栏
+            CheckSlotFrame(_slotListID, false);
+
+            // 更新点击格子
+            _slotListID = gridSlotConst;
+
+            // 高亮选中的格子
+            CheckSlotFrame(gridSlotConst, true);
+
         }
 
         /// <summary>
@@ -91,25 +114,25 @@ namespace Inventory.InventoryManager
         /// </summary>
         /// <param name="slotListID">指定的格子ID</param>
         /// <param name="condition">指定的状态</param>
-        private void CheckSlotFrame(int slotListID, bool condition)
+        private void CheckSlotFrame(int slotListID, bool condition = true)
         {
             // 关闭
             if (condition == false)
             {
                 // 检查上一个物品栏
-                if (slotListID != -1 && _grid.GetChild(slotListID).Find("Frame").gameObject.activeInHierarchy)
+                if (slotListID != -1 && grid.GetChild(slotListID).Find("Frame").gameObject.activeInHierarchy)
                 {
                     // 取消高亮
-                    _grid.GetChild(slotListID).Find("Frame").gameObject.SetActive(false);
+                    grid.GetChild(slotListID).Find("Frame").gameObject.SetActive(false);
                 }
             }
             else
             {
                 // 检查上一个物品栏
-                if (slotListID != -1 && _grid.GetChild(slotListID).Find("Frame").gameObject.activeInHierarchy == false)
+                if (slotListID != -1 && grid.GetChild(slotListID).Find("Frame").gameObject.activeInHierarchy == false)
                 {
                     // 取消高亮
-                    _grid.GetChild(slotListID).Find("Frame").gameObject.SetActive(true);
+                    grid.GetChild(slotListID).Find("Frame").gameObject.SetActive(true);
                 }
             }
         }
@@ -118,22 +141,22 @@ namespace Inventory.InventoryManager
 
         public void FuncEquip()
         {
-            inventory.IsEquippedOn(_slotListID);
+            _inventory.IsEquippedOn(_slotListID);
         }
 
         public void FuncUnEquip()
         {
-            inventory.IsEquippedOff(_slotListID);
+            _inventory.IsEquippedOff(_slotListID);
         }
 
         public void FuncDelete()
         {
-            inventory.RemoveItemToList(_slotListID);
+            _inventory.RemoveItemToList(_slotListID);
         }
 
         public void FuncDeleteAll()
         {
-            inventory.RemoveItemToListAll();
+            _inventory.RemoveItemToListAll();
         }
     }
 }
