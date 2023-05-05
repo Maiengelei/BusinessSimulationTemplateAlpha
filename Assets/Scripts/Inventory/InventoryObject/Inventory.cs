@@ -264,6 +264,29 @@ namespace Inventory.InventoryObject
         }
 
         /// <summary>
+        /// 查找已经装备的道具
+        /// </summary>
+        /// <returns>返回 List，若没有装备道具则 List 长度为 0</returns>
+        public List<InventoryList<Item, ItemAttributes>> GetIsEquippedItemList()
+        {
+            // 构造临时 List
+            List<InventoryList<Item, ItemAttributes>> items = 
+                new List<InventoryList<Item, ItemAttributes>>();
+
+            // 检查 List 元素，如果当前 List 元素已经装备，则压入临时 List
+            for (int i = 0; i < isEquippedValue; i++)
+            {
+                if (itemList[i].Attributes.IsEquipped)
+                {
+                    items.Add(itemList[i]);
+                }
+            }
+
+            // 返回临时 List
+            return items;
+        }
+
+        /// <summary>
         /// 获取背包中所有已装备的道具的值的总和
         /// </summary>
         private int GetEquippedSum()
