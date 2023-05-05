@@ -97,7 +97,10 @@ namespace Inventory.InventoryObject
                 itemList.Add(itemTemp);
 
                 // 重新排序并更新UI
-                UpdateUI();
+                if (UpdateUI != null)
+                {
+                    UpdateUI();
+                }
             }
         }
 
@@ -117,7 +120,7 @@ namespace Inventory.InventoryObject
             }
 
             // 检查元素是否正在装备
-            if (itemList[itemID].Attributes.IsEquipped == true)
+            if (itemList[itemID].Attributes.IsEquipped)
             {
 #if UNITY_EDITOR
                 Debug.Log($"元素 {itemID} 正在装备中");
@@ -129,7 +132,10 @@ namespace Inventory.InventoryObject
             itemList.RemoveAt(itemID);
 
             // 重新排序并更新UI
-            UpdateUI();
+            if (UpdateUI != null)
+            {
+                UpdateUI();
+            }
         }
 
         /// <summary>
@@ -140,7 +146,10 @@ namespace Inventory.InventoryObject
             itemList.RemoveAll(inventoryList => inventoryList.Attributes.IsEquipped == false);
 
             // 重新排序并更新UI
-            UpdateUI();
+            if (UpdateUI != null)
+            {
+                UpdateUI();
+            }
         }
 
         /// <summary>
@@ -159,7 +168,7 @@ namespace Inventory.InventoryObject
             }
 
             // 检查元素是否正在装备
-            if (itemList[itemID].Attributes.IsEquipped == true)
+            if (itemList[itemID].Attributes.IsEquipped)
             {
 #if UNITY_EDITOR
                 Debug.Log($"元素 {itemID} 正在装备中");
@@ -193,7 +202,10 @@ namespace Inventory.InventoryObject
             equippedSum = GetEquippedSum();
 
             // 重新排序并更新UI
-            UpdateUI();
+            if (UpdateUI != null)
+            {
+                UpdateUI();
+            }
         }
 
         /// <summary>
@@ -239,7 +251,10 @@ namespace Inventory.InventoryObject
             equippedSum = GetEquippedSum();
 
             // 重新排序并更新UI
-            UpdateUI();
+            if (UpdateUI != null)
+            {
+                UpdateUI();
+            }
         }
 
         /// <summary>
@@ -249,11 +264,11 @@ namespace Inventory.InventoryObject
         {
             int sum = 0;
 
-            for (int i = 0; i < itemList.Count; i++)
+            foreach (var t in itemList)
             {
-                if (itemList[i].Attributes.IsEquipped == true)
+                if (t.Attributes.IsEquipped)
                 {
-                    sum += itemList[i].Attributes.ItemValue;
+                    sum += t.Attributes.ItemValue;
                 }
             }
 
