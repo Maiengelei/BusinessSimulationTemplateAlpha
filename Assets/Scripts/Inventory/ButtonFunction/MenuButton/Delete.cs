@@ -2,7 +2,7 @@ using Inventory.InventoryManager;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Inventory.ButtonFunction
+namespace Inventory.ButtonFunction.MenuButton
 {
     /// <summary>
     /// 背包界面的删除道具功能
