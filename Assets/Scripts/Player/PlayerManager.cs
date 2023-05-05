@@ -64,12 +64,12 @@ namespace Player
         private void Update()
         {
             CheckGround();
-            CharacterMove();
         }
 
         private void LateUpdate()
         {
             CameraMove();
+            CharacterMove();
         }
 
         private void CheckGround()
