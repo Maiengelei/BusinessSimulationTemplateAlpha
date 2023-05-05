@@ -1,5 +1,6 @@
 ﻿using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Inventory.InventoryManager
 {
