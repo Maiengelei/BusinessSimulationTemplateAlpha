@@ -83,10 +83,12 @@ namespace Inventory.InventoryObject
             if (CheckItemList())
             {
                 // 计算道具属性值随机数
-                int itemValueTemp = Random.Range(item.itemValueMin, item.itemValueMax);
+                int itemValueTemp = 
+                    Random.Range(item.itemValueMin, item.itemValueMax);
 
                 // 填写道具属性
-                ItemAttributes itemAttributes = new ItemAttributes(itemValueTemp, false);
+                ItemAttributes itemAttributes = 
+                    new ItemAttributes(itemValueTemp, false);
 
                 // 根据传入道具和道具属性构建 List 元素
                 // 道具默认不装备
