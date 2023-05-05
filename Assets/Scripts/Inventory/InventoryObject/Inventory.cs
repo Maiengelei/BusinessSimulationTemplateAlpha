@@ -99,6 +99,7 @@ namespace Inventory.InventoryObject
                 itemList.Add(itemTemp);
 
                 // 重新排序并更新UI
+                ListSorting();
                 if (UpdateUI != null)
                 {
                     UpdateUI();
@@ -134,6 +135,7 @@ namespace Inventory.InventoryObject
             itemList.RemoveAt(itemID);
 
             // 重新排序并更新UI
+            ListSorting();
             if (UpdateUI != null)
             {
                 UpdateUI();
@@ -204,6 +206,7 @@ namespace Inventory.InventoryObject
             equippedSum = GetEquippedSum();
 
             // 重新排序并更新UI
+            ListSorting();
             if (UpdateUI != null)
             {
                 UpdateUI();
@@ -253,6 +256,7 @@ namespace Inventory.InventoryObject
             equippedSum = GetEquippedSum();
 
             // 重新排序并更新UI
+            ListSorting();
             if (UpdateUI != null)
             {
                 UpdateUI();
