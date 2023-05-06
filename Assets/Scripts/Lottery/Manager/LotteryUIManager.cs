@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -36,6 +37,12 @@ namespace Lottery.Manager
             UpdateGrid();
         }
 
+        private void OnDisable()
+        {
+            // 清空UI界面元素
+            DropGrid();
+        }
+
         /// <summary>
         /// 更新抽奖机奖品界面
         /// </summary>
@@ -45,6 +52,14 @@ namespace Lottery.Manager
             {
                 var itemObj = Instantiate(lotterySlotPrefab,lotteryGrid);
                 itemObj.transform.Find("ItemSprite").GetComponent<Image>().sprite = item.item.itemSprite;
+            }
+        }
+
+        private void DropGrid()
+        {
+            for (int i = 0; i < lotteryGrid.childCount; i++)
+            {
+                Destroy(lotteryGrid.GetChild(i).gameObject);
             }
         }
     }
