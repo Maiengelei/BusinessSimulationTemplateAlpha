@@ -7,7 +7,7 @@ using Random = UnityEngine.Random; // 命名空间冲突，使用 Using 解决�
 namespace Inventory.InventoryObject
 {
     [CreateAssetMenu(fileName = "NewInventory", menuName = "Inventory/Inventory")]
-    public class Inventory : ScriptableObject
+    public class InventoryObject : ScriptableObject
     {
         /// <summary>
         /// 创建一个委托
@@ -44,8 +44,8 @@ namespace Inventory.InventoryObject
         /// <summary>
         /// 背包列表 List
         /// </summary>
-        public List<InventoryList<Item, ItemAttributes>>
-            itemList = new List<InventoryList<Item, ItemAttributes>>();
+        public List<InventoryList<ItemObject, ItemAttributes>>
+            itemList = new List<InventoryList<ItemObject, ItemAttributes>>();
 
         // -----------------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ namespace Inventory.InventoryObject
         /// 检查该背包是否已经满了
         /// </summary>
         /// <returns>背包已满时 False</returns>
-        private bool CheckItemList()
+        public bool CheckItemList()
         {
             // 如果当前列表中的值是否超过上限
             if (itemList.Count < inventoryLenght)
@@ -76,15 +76,15 @@ namespace Inventory.InventoryObject
         /// <summary>
         /// 向背包中增加道具
         /// </summary>
-        /// <param name="item">要增加的道具</param>
-        public void AddItemToList(Item item)
+        /// <param name="itemObject">要增加的道具</param>
+        public void AddItemToList(ItemObject itemObject)
         {
             // 检查列表是否已经满了
             if (CheckItemList())
             {
                 // 计算道具属性值随机数
                 int itemValueTemp = 
-                    Random.Range(item.itemValueMin, item.itemValueMax);
+                    Random.Range(itemObject.itemValueMin, itemObject.itemValueMax);
 
                 // 填写道具属性
                 ItemAttributes itemAttributes = 
@@ -92,8 +92,8 @@ namespace Inventory.InventoryObject
 
                 // 根据传入道具和道具属性构建 List 元素
                 // 道具默认不装备
-                InventoryList<Item, ItemAttributes> itemTemp =
-                    new InventoryList<Item, ItemAttributes>(item, itemAttributes);
+                InventoryList<ItemObject, ItemAttributes> itemTemp =
+                    new InventoryList<ItemObject, ItemAttributes>(itemObject, itemAttributes);
 
                 // 将值填入 List
                 itemList.Add(itemTemp);
@@ -267,11 +267,11 @@ namespace Inventory.InventoryObject
         /// 查找已经装备的道具
         /// </summary>
         /// <returns>返回 List，若没有装备道具则 List 长度为 0</returns>
-        public List<InventoryList<Item, ItemAttributes>> GetIsEquippedItemList()
+        public List<InventoryList<ItemObject, ItemAttributes>> GetIsEquippedItemList()
         {
             // 构造临时 List
-            List<InventoryList<Item, ItemAttributes>> items = 
-                new List<InventoryList<Item, ItemAttributes>>();
+            List<InventoryList<ItemObject, ItemAttributes>> items = 
+                new List<InventoryList<ItemObject, ItemAttributes>>();
 
             // 检查 List 元素，如果当前 List 元素已经装备，则压入临时 List
             for (int i = 0; i < isEquippedValue; i++)

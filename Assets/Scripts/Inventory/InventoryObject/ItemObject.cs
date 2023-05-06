@@ -3,7 +3,7 @@
 namespace Inventory.InventoryObject
 {
     [CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
-    public class Item : ScriptableObject
+    public class ItemObject : ScriptableObject
     {
         /// <summary>
         /// 道具名称
