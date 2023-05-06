@@ -22,11 +22,6 @@ namespace Lottery.LotteryUI
         public GameObject lotterySlotPrefab;
 
         /// <summary>
-        /// 抽奖机UI父物体
-        /// </summary>
-        public GameObject uiRotatePoint;
-
-        /// <summary>
         /// 接受 LotteryList
         /// </summary>
         private LotteryData _lotteryList;
@@ -42,7 +37,7 @@ namespace Lottery.LotteryUI
                 UpdateGrid();
                 
                 // 加载完后关闭
-                uiRotatePoint.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
 
