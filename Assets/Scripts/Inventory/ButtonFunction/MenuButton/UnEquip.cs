@@ -2,7 +2,7 @@ using Inventory.InventoryManager;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Inventory.ButtonFunction
+namespace Inventory.ButtonFunction.MenuButton
 {
     public class UnEquip : MonoBehaviour
     {
