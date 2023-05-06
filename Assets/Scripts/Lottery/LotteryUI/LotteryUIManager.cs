@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Lottery.Manager
+namespace Lottery.LotteryUI
 {
     public class LotteryUIManager : MonoBehaviour
     {
@@ -51,10 +48,13 @@ namespace Lottery.Manager
             foreach (var item in _lotteryList.GetLotteryList)
             {
                 var itemObj = Instantiate(lotterySlotPrefab,lotteryGrid);
-                itemObj.transform.Find("ItemSprite").GetComponent<Image>().sprite = item.item.itemSprite;
+                itemObj.transform.Find("ItemSprite").GetComponent<Image>().sprite = item.itemObject.itemSprite;
             }
         }
 
+        /// <summary>
+        /// 清空抽奖机界面
+        /// </summary>
         private void DropGrid()
         {
             for (int i = 0; i < lotteryGrid.childCount; i++)
