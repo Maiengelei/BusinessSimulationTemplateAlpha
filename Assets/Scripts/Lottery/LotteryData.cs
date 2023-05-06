@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Inventory.InventoryObject;
+using Inventory.InventoryScriptableObject;
 using UnityEngine;
 using UnityEngine.Serialization;
 

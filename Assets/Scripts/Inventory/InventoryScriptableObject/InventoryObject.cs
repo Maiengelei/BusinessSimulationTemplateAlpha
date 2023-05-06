@@ -4,7 +4,7 @@ using Inventory.InventoryData;
 using UnityEngine;
 using Random = UnityEngine.Random; // 命名空间冲突，使用 Using 解决冲突
 
-namespace Inventory.InventoryObject
+namespace Inventory.InventoryScriptableObject
 {
     [CreateAssetMenu(fileName = "NewInventory", menuName = "Inventory/Inventory")]
     public class InventoryObject : ScriptableObject

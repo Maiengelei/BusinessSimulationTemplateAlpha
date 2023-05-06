@@ -1,4 +1,4 @@
-﻿using Inventory.InventoryObject;
+﻿using Inventory.InventoryScriptableObject;
 using UnityEngine;
 
 namespace Player

@@ -1,6 +1,6 @@
-﻿using Player;
+﻿using Inventory.InventoryScriptableObject;
+using Player;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Inventory.InventoryManager
 {
@@ -9,7 +9,7 @@ namespace Inventory.InventoryManager
         /// <summary>
         /// 对应背包
         /// </summary>
-        private InventoryObject.Inventory _inventory;
+        private InventoryObject _inventoryObject;
 
         /// <summary>
         /// 点击的格子ID
@@ -33,10 +33,10 @@ namespace Inventory.InventoryManager
             // 通过 Tag 获取玩家对象
             GameObject player = GameObject.FindWithTag("Player");
             // 获取到玩家的背包
-            _inventory = player.GetComponent<GamerObjectProperties>().Inventory;
+            _inventoryObject = player.GetComponent<GamerObjectProperties>().InventoryObject;
 
             // 增加委托
-            _inventory.UpdateUI += UpdateItem;
+            _inventoryObject.UpdateUI += UpdateItem;
             
             // 打开界面时自动刷新
             UpdateItem();
@@ -45,7 +45,7 @@ namespace Inventory.InventoryManager
         private void OnDisable()
         {
             // 移除委托
-            _inventory.UpdateUI -= UpdateItem;
+            _inventoryObject.UpdateUI -= UpdateItem;
             
             CheckSlotFrame(_slotListID, false);
             _slotListID = -1;
@@ -67,21 +67,21 @@ namespace Inventory.InventoryManager
                 }
             }
 
-            for (int i = 0; i < _inventory.itemList.Count; i++)
+            for (int i = 0; i < _inventoryObject.itemList.Count; i++)
             {
                 // 获取指定格子的数据
                 _slotData = grid.GetChild(i).GetComponent<SlotData>();
 
                 // 增加图标
                 _slotData.itemImage.sprite =
-                    _inventory.itemList[i].Item.itemSprite;
+                    _inventoryObject.itemList[i].Item.itemSprite;
 
                 // 增加数值
                 _slotData.itemValue.text =
-                    _inventory.itemList[i].Attributes.ItemValue.ToString();
+                    _inventoryObject.itemList[i].Attributes.ItemValue.ToString();
 
                 // 判断是否为已装备道具
-                if (_inventory.itemList[i].Attributes.IsEquipped)
+                if (_inventoryObject.itemList[i].Attributes.IsEquipped)
                 {
                     // 启用 已装备 图标
                     grid.GetChild(i).Find("IsEquipped").gameObject.SetActive(true);
@@ -141,22 +141,22 @@ namespace Inventory.InventoryManager
 
         public void FuncEquip()
         {
-            _inventory.IsEquippedOn(_slotListID);
+            _inventoryObject.IsEquippedOn(_slotListID);
         }
 
         public void FuncUnEquip()
         {
-            _inventory.IsEquippedOff(_slotListID);
+            _inventoryObject.IsEquippedOff(_slotListID);
         }
 
         public void FuncDelete()
         {
-            _inventory.RemoveItemToList(_slotListID);
+            _inventoryObject.RemoveItemToList(_slotListID);
         }
 
         public void FuncDeleteAll()
         {
-            _inventory.RemoveItemToListAll();
+            _inventoryObject.RemoveItemToListAll();
         }
     }
 }
