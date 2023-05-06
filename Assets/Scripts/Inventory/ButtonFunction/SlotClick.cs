@@ -1,5 +1,6 @@
 using Inventory.InventoryManager;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Inventory.ButtonFunction
@@ -19,7 +20,7 @@ namespace Inventory.ButtonFunction
         /// <summary>
         /// 背包 Bag 上的 Inventory UI Manager 脚本
         /// </summary>
-        private InventoryUIManager _bagObject;
+        public InventoryUIManager bagObject;
 
         private void Start()
         {
@@ -27,13 +28,11 @@ namespace Inventory.ButtonFunction
             _btn.onClick.AddListener(OnClick);
 
             _item = transform.Find("Item");
-
-            _bagObject = FindObjectOfType<Canvas>().transform.Find("Bag").GetComponent<InventoryUIManager>();
         }
 
         private void OnClick()
         {
-            _bagObject.CheckSlot(GetComponent<SlotData>().gridSlotConst);
+            bagObject.CheckSlot(GetComponent<SlotData>().gridSlotConst);
         
 #if UNITY_EDITOR
             Debug.Log(_item.gameObject.activeInHierarchy
