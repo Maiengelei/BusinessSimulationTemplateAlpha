@@ -22,6 +22,11 @@ namespace Inventory.InventoryScriptableObject
         // -----------------------------------------------------------------------------------
 
         /// <summary>
+        /// 玩家的钱
+        /// </summary>
+        public int money;
+        
+        /// <summary>
         /// 背包最大空间
         /// </summary>
         public int inventoryLenght = 18;
