@@ -11,9 +11,18 @@ namespace Lottery.Manager
 {
     public class LotteryManager : MonoBehaviour
     {
-        [SerializeField] private Transform canvas;
-        [SerializeField] private Transform followPlayer;
-        
-        
+        public delegate void LotteryPlayerDelegate(Collider other);
+        public event LotteryPlayerDelegate PlayerStatus;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                if (PlayerStatus != null)
+                {
+                    PlayerStatus(other);
+                }
+            }
+        }
     }
 }
