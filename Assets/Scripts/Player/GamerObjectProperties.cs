@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using Inventory.InventoryObject;
+using UnityEngine;
 
 namespace Player
 {
     public class GamerObjectProperties : MonoBehaviour
     {
-        [SerializeField] private Inventory.InventoryObject.Inventory inventory;
+        [SerializeField] private InventoryObject inventoryObject;
         
-        public Inventory.InventoryObject.Inventory Inventory => inventory;
+        public InventoryObject InventoryObject => inventoryObject;
     }
 }
