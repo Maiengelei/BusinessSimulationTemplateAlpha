@@ -27,6 +27,11 @@ namespace Lottery.Manager
         // ---------------------------------------------------------------
 
         /// <summary>
+        /// 抽奖价格
+        /// </summary>
+        [SerializeField] private int price = 50;
+        
+        /// <summary>
         /// 玩家背包
         /// </summary>
         private InventoryObject _player;
@@ -81,17 +86,25 @@ namespace Lottery.Manager
         /// <summary>
         /// 向玩家背包中新增道具
         /// </summary>
-        private void GetLotteryItem()
+        public void GetLotteryItem()
         {
-            // 检查玩家背包是否有足够的空间
-            if (_player != null && _player.CheckItemList())
+            if (_player.money >= price)
             {
-                var item = _lotteryData.GetRandomItem();
-                _player.AddItemToList(item);
+                // 检查玩家背包是否有足够的空间
+                if (_player != null && _player.CheckItemList())
+                {
+                    _player.money -= price;
+                    var item = _lotteryData.GetRandomItem();
+                    _player.AddItemToList(item);
+                }
+                else
+                {
+                    Debug.Log($"你的背包满了，背包最大容量为{_player.inventoryLenght}");
+                }
             }
             else
             {
-                Debug.Log($"你的背包满了，背包最大容量为{_player.inventoryLenght}");
+                Debug.Log($"你的钱不够");
             }
         }
     }
