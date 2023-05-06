@@ -1,5 +1,7 @@
 using System;
+using Lottery.Manager;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Lottery
@@ -7,6 +9,9 @@ namespace Lottery
     public class LotteryClick : MonoBehaviour
     {
         private Button _btn;
+
+        public LotteryManager lottery;
+
 
         private void Start()
         {
@@ -16,7 +21,7 @@ namespace Lottery
 
         private void OnClick()
         {
-            
+            lottery.GetLotteryItem();
         }
     }
 }
