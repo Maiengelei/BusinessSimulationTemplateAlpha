@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Inventory.InventoryScriptableObject;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Lottery
 {
@@ -34,6 +35,20 @@ namespace Lottery
             foreach (var item in lotteryList)
             {
                 totalWeight += item.weighted;
+            }
+            
+            // 生成一个0到总权重之间的随机数
+            int randomWeight = Random.Range(0, totalWeight);
+
+            // 遍历道具列表，根据权重选择道具
+            foreach (var item in lotteryList)
+            {
+                randomWeight -= item.weighted;
+
+                if (randomWeight <= 0)
+                {
+                    return item.itemObject;
+                }
             }
             
             return null;
