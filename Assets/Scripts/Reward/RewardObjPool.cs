@@ -6,7 +6,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Clicker
+namespace Reward
 {
     public class RewardObjPool : MonoBehaviour
     {
