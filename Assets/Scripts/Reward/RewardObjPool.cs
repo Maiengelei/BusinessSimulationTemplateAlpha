@@ -26,12 +26,16 @@ namespace Reward
 
             for (int i = 0; i < poolSize; i++)
             {
-                GameObject obj = Instantiate(rewardObjectPrefab);
+                GameObject obj = Instantiate(rewardObjectPrefab,transform);
                 obj.SetActive(false);
                 _pooledObjects.Add(obj);
             }
         }
 
+        /// <summary>
+        /// 构建对象池
+        /// </summary>
+        /// <returns>目标对象</returns>
         public GameObject GetRewardObject()
         {
             for (int i = 0; i < _pooledObjects.Count; i++)
@@ -44,7 +48,7 @@ namespace Reward
 
             if (expandPool)
             {
-                GameObject obj = Instantiate(rewardObjectPrefab);
+                GameObject obj = Instantiate(rewardObjectPrefab,transform);
                 obj.SetActive(false);
                 _pooledObjects.Add(obj);
                 return obj;
