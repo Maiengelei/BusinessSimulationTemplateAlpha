@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Reward
@@ -11,6 +12,11 @@ namespace Reward
         /// 图标消失时间
         /// </summary>
         public float intervalInSeconds = 10f;
+
+        /// <summary>
+        /// 初始归属父对象
+        /// </summary>
+        public RewardObjPool poolObject;
 
         private Image _color;
         private Color _startingColor;
@@ -23,6 +29,8 @@ namespace Reward
 
         private void OnEnable()
         {
+            poolObject = transform.parent.gameObject.GetComponent<RewardObjPool>();
+            
             _color = this.gameObject.GetComponent<Image>();
 
             // 还原颜色状态
@@ -47,7 +55,7 @@ namespace Reward
 
                 if (_currentTime >= intervalInSeconds)
                 {
-                    gameObject.SetActive(false);
+                    poolObject.ReturnRewardObject(this.gameObject);
                     _isFading = false;
                     _currentTime = 0f;
                 }
