@@ -23,7 +23,7 @@ namespace Lottery.Manager
         /// 抽奖价格
         /// </summary>
         [SerializeField] private int price = 50;
-        
+
         /// <summary>
         /// 玩家背包
         /// </summary>
@@ -81,12 +81,12 @@ namespace Lottery.Manager
         /// </summary>
         public void GetLotteryItem()
         {
-            if (_player.money >= price)
+            if (_player.GetMoney() >= price)
             {
                 // 检查玩家背包是否有足够的空间
                 if (_player != null && _player.CheckItemList())
                 {
-                    _player.money -= price;
+                    _player.ReduceMoney(price);
                     var item = _lotteryData.GetRandomItem();
                     _player.AddItemToList(item);
                 }

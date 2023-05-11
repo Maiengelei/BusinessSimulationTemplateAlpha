@@ -83,7 +83,7 @@ namespace Reward
         /// </summary>
         public void GetReward()
         {
-            inventoryObject.money += rewardValue;
+            inventoryObject.AddMoney(rewardValue);
             GameObject obj = rewardObjPool.GetRewardObject();
 
             // 给予随机位置
