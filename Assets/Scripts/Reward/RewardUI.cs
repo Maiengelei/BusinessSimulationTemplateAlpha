@@ -18,6 +18,8 @@ namespace Reward
 
         private Coroutine _fadeCoroutine;
         private bool _isFading;
+        
+        private float _currentTime = 0f;
 
         private void OnEnable()
         {
@@ -30,35 +32,35 @@ namespace Reward
             // 设置目标状态
             _targetColor = new Color(_color.color.r, _color.color.g, _color.color.b, 0);
 
-            if (!_isFading)
-            {
-                if (_fadeCoroutine != null)
-                {
-                    StopCoroutine(_fadeCoroutine);
-                }
+            // 归零计数器
+            _currentTime = 0f;
 
-                _fadeCoroutine = StartCoroutine(ExecuteFunction());
+            StartFading();
+        }
+
+
+        void Update()
+        {
+            if (_isFading)
+            {
+                _currentTime += Time.deltaTime;
+
+                if (_currentTime >= intervalInSeconds)
+                {
+                    gameObject.SetActive(false);
+                    _isFading = false;
+                    _currentTime = 0f;
+                }
+                else
+                {
+                    _color.color = Color.Lerp(_startingColor, _targetColor, _currentTime / intervalInSeconds);
+                }
             }
         }
 
-        /// <summary>
-        /// 启用协程
-        /// </summary>
-        IEnumerator ExecuteFunction()
+        private void StartFading()
         {
             _isFading = true;
-            float currentTime = 0f;
-
-            // 渐变
-            while (currentTime < intervalInSeconds)
-            {
-                currentTime += Time.deltaTime;
-                _color.color = Color.Lerp(_startingColor, _targetColor, currentTime / intervalInSeconds);
-                yield return null;
-            }
-
-            gameObject.SetActive(false);
-            _isFading = false;
         }
     }
 }
