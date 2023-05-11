@@ -56,5 +56,11 @@ namespace Reward
 
             return null;
         }
+
+        public void ReturnRewardObject(GameObject obj)
+        {
+            obj.SetActive(false);
+            obj.transform.SetParent(this.transform,true);
+        }
     }
 }
