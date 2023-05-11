@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Inventory.InventoryData;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random; // 命名空间冲突，使用 Using 解决冲突
 
 namespace Inventory.InventoryScriptableObject
@@ -26,7 +27,7 @@ namespace Inventory.InventoryScriptableObject
         /// <summary>
         /// 玩家的钱
         /// </summary>
-        private int _money;
+        [SerializeField] private int money;
 
         /// <summary>
         /// 背包最大空间
@@ -317,7 +318,7 @@ namespace Inventory.InventoryScriptableObject
         /// <param name="money">金钱</param>
         public void AddMoney(int money)
         {
-            this._money += money;
+            this.money += money;
 
             if (UpdateMoneyUI != null)
             {
@@ -332,9 +333,9 @@ namespace Inventory.InventoryScriptableObject
         /// <returns>是否减少成功</returns>
         public bool ReduceMoney(int money)
         {
-            if (this._money >= money)
+            if (this.money >= money)
             {
-                this._money -= money;
+                this.money -= money;
 
                 if (UpdateMoneyUI != null)
                 {
@@ -353,7 +354,7 @@ namespace Inventory.InventoryScriptableObject
         /// <returns>金钱值</returns>
         public int GetMoney()
         {
-            return _money;
+            return money;
         }
     }
 }
