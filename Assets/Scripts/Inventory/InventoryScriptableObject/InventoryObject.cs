@@ -19,13 +19,15 @@ namespace Inventory.InventoryScriptableObject
         /// </summary>
         public event InventoryUI UpdateUI;
 
+        public event InventoryUI UpdateMoneyUI;
+
         // -----------------------------------------------------------------------------------
 
         /// <summary>
         /// 玩家的钱
         /// </summary>
-        public int money;
-        
+        private int _money;
+
         /// <summary>
         /// 背包最大空间
         /// </summary>
@@ -88,11 +90,11 @@ namespace Inventory.InventoryScriptableObject
             if (CheckItemList())
             {
                 // 计算道具属性值随机数
-                int itemValueTemp = 
+                int itemValueTemp =
                     Random.Range(itemObject.itemValueMin, itemObject.itemValueMax);
 
                 // 填写道具属性
-                ItemAttributes itemAttributes = 
+                ItemAttributes itemAttributes =
                     new ItemAttributes(itemValueTemp, false);
 
                 // 根据传入道具和道具属性构建 List 元素
@@ -275,7 +277,7 @@ namespace Inventory.InventoryScriptableObject
         public List<InventoryList<ItemObject, ItemAttributes>> GetIsEquippedItemList()
         {
             // 构造临时 List
-            List<InventoryList<ItemObject, ItemAttributes>> items = 
+            List<InventoryList<ItemObject, ItemAttributes>> items =
                 new List<InventoryList<ItemObject, ItemAttributes>>();
 
             // 检查 List 元素，如果当前 List 元素已经装备，则压入临时 List
@@ -307,6 +309,51 @@ namespace Inventory.InventoryScriptableObject
             }
 
             return sum;
+        }
+
+        /// <summary>
+        /// 增加金钱
+        /// </summary>
+        /// <param name="money">金钱</param>
+        public void AddMoney(int money)
+        {
+            this._money += money;
+
+            if (UpdateMoneyUI != null)
+            {
+                UpdateMoneyUI();
+            }
+        }
+
+        /// <summary>
+        /// 减少金钱
+        /// </summary>
+        /// <param name="money">金钱</param>
+        /// <returns>是否减少成功</returns>
+        public bool ReduceMoney(int money)
+        {
+            if (this._money >= money)
+            {
+                this._money -= money;
+
+                if (UpdateMoneyUI != null)
+                {
+                    UpdateMoneyUI();
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 获取当前金钱值
+        /// </summary>
+        /// <returns>金钱值</returns>
+        public int GetMoney()
+        {
+            return _money;
         }
     }
 }
