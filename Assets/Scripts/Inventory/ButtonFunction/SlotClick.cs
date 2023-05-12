@@ -1,3 +1,8 @@
+/*
+ * 背包格子属性
+ * 用于管理背包格子的属性传递和点击事件
+ */
+
 using Inventory.InventoryManager;
 using UnityEngine;
 using UnityEngine.Serialization;
