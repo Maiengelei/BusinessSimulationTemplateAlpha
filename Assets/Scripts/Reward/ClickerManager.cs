@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Inventory.InventoryScriptableObject;
+using Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -29,6 +30,13 @@ namespace Reward
         private Vector3[] _corners = new Vector3[4];
 
         private Vector3 _screenBounds;
+
+        private InventoryObject _inventoryObject;
+
+        private void OnEnable()
+        {
+            _inventoryObject = GameObject.FindWithTag("Player").GetComponent<GamerObjectProperties>().InventoryObject;
+        }
 
         private void Start()
         {
@@ -117,7 +125,7 @@ namespace Reward
         /// </summary>
         public void GetReward()
         {
-            inventoryObject.AddMoney(rewardValue);
+            inventoryObject.AddMoney(rewardValue + _inventoryObject.GetEquippedSum());
             GameObject obj = rewardObjPool.GetRewardObject();
 
             // 给予随机位置
