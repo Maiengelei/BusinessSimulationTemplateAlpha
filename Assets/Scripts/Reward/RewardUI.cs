@@ -61,7 +61,11 @@ namespace Reward
                 }
                 else
                 {
-                    _color.color = Color.Lerp(_startingColor, _targetColor, _currentTime / intervalInSeconds);
+                    _color.color = 
+                        Color.Lerp(
+                            _startingColor, 
+                            _targetColor, 
+                            _currentTime / intervalInSeconds);
                 }
             }
         }
