@@ -220,7 +220,7 @@ namespace Inventory.InventoryScriptableObject
             isEquippedOnValue += 1;
 
             // 更新总值
-            equippedSum = GetEquippedSum();
+            equippedSum = UpdateEquippedSum();
 
             if (PetAddList != null)
             {
@@ -280,7 +280,7 @@ namespace Inventory.InventoryScriptableObject
             }
 
             // 更新总值
-            equippedSum = GetEquippedSum();
+            equippedSum = UpdateEquippedSum();
 
             // 重新排序并更新UI
             ListSorting();
@@ -316,7 +316,7 @@ namespace Inventory.InventoryScriptableObject
         /// <summary>
         /// 获取背包中所有已装备的道具的值的总和
         /// </summary>
-        private int GetEquippedSum()
+        private int UpdateEquippedSum()
         {
             int sum = 0;
 
@@ -374,6 +374,11 @@ namespace Inventory.InventoryScriptableObject
         public int GetMoney()
         {
             return money;
+        }
+
+        public int GetEquippedSum()
+        {
+            return equippedSum;
         }
     }
 }
