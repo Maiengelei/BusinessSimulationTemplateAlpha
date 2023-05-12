@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Inventory.InventoryScriptableObject;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 namespace Reward
@@ -77,6 +79,26 @@ namespace Reward
                 }
             }
         }
+
+        // 检测是否点击了UI
+        private bool IsPointerOverUIObject()
+        {
+            // 创建一个新的PointerEventData实例
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+
+            // 设置PointerEventData的位置为当前鼠标的位置
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
+            // 创建一个用来存储所有被点击的对象的列表
+            List<RaycastResult> results = new List<RaycastResult>();
+
+            // 使用EventSystem来发射一条光线并获取所有的结果。这条光线将会穿过所有的UI元素，然后返回所有被点击的对象
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+            // 如果结果列表中有元素，那么鼠标点击的位置就有UI元素，返回true；否则，返回false
+            return results.Count > 0;
+        }
+
 
         /// <summary>
         /// 获取一次奖励
