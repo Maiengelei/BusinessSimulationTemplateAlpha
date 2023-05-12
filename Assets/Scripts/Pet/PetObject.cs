@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 namespace Pet
 {
@@ -17,8 +15,8 @@ namespace Pet
         public float minimumDistanceFromPlayer = 1.5f;
         
         // 在地面以上的最小高度
-        public float minimumHeightAboveGround = 0.5f;
-
+        public float minimumHeightAboveGround = 1f;
+        
         // 宠物管理器
         public PetManager petManager;
 
@@ -60,7 +58,7 @@ namespace Pet
                         }
                     }
                 }
-                
+
                 // 发射一个从宠物向下的射线
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, -transform.up, out hit))
