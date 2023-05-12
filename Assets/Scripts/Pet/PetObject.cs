@@ -1,31 +1,63 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Pet
 {
     public class PetObject : MonoBehaviour
     {
+        // 这是玩家的引用，宠物需要追踪的目标
+        public Transform player;
+        // 追踪玩家的速度
         public float speed = 2.0f;
-        public Vector3 offset = Vector3.zero;
-        private GameObject _player;
+        // 与其他宠物保持的距离
+        public float distanceFromOthers = 1.0f;
+        
+        // 与玩家保持的最小距离
+        public float minimumDistanceFromPlayer = 1.5f;
 
-        public void Initialize(GameObject player, Vector3 offset)
+        // 宠物管理器
+        public PetManager petManager;
+
+        private void Awake()
         {
-            this._player = player;
-            this.offset = offset;
+            petManager = GameObject.Find("PetManager").GetComponent<PetManager>();
         }
 
         void Update()
         {
-            if (_player == null) return;
-
-            float distance = Vector3.Distance(this.transform.position, _player.transform.position + offset);
-            if (distance > 1.0f)
+            // 如果玩家存在
+            if (player != null)
             {
-                transform.position = Vector3.MoveTowards(transform.position, _player.transform.position + offset,
-                    speed * Time.deltaTime);
+                // 让宠物朝向玩家
+                transform.LookAt(player);
+
+                // 使宠物向玩家移动
+                transform.position += transform.forward * (speed * Time.deltaTime);
+                
+                // 检查与玩家的距离，如果太近就后退一点
+                float distanceFromPlayer = Vector3.Distance(transform.position, player.position);
+                if (distanceFromPlayer < minimumDistanceFromPlayer)
+                {
+                    transform.position -= transform.forward * (minimumDistanceFromPlayer - distanceFromPlayer);
+                }
+
+                // 遍历所有的宠物，保持距离
+                foreach (PetObject otherPet in petManager.pets)
+                {
+                    // 确保不与自己进行比较
+                    if (otherPet != this)
+                    {
+                        float distance = Vector3.Distance(transform.position, otherPet.transform.position);
+                        // 如果距离太近
+                        if (distance < distanceFromOthers)
+                        {
+                            // 从其他宠物方向向后移动
+                            transform.position -= (otherPet.transform.position - transform.position).normalized * (distanceFromOthers - distance);
+                        }
+                    }
+                }
             }
-            
-            transform.LookAt(_player.transform);
         }
     }
 }
