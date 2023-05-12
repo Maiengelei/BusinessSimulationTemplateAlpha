@@ -10,20 +10,26 @@ namespace Reward
 {
     public class RewardObjPool : MonoBehaviour
     {
+        // 奖励UI的预制体
         public GameObject rewardObjectPrefab;
 
+        // 对象池大小
         public int poolSize = 16;
 
+        // 当池子中的对象耗尽后是否自动拓展
         public bool expandPool = true;
 
+        // 对象池列表
         private List<GameObject> _pooledObjects;
 
         // ------------------------------------------------------
 
         private void Start()
         {
+            // 实例化对象池
             _pooledObjects = new List<GameObject>();
 
+            // 对象池预先构建
             for (int i = 0; i < poolSize; i++)
             {
                 GameObject obj = Instantiate(rewardObjectPrefab,transform);
@@ -32,9 +38,10 @@ namespace Reward
             }
         }
 
-        // 构建对象池
+        // 获取对象池
         public GameObject GetRewardObject()
         {
+            // 尝试从对象池中获取对象
             for (int i = 0; i < _pooledObjects.Count; i++)
             {
                 if (!_pooledObjects[i].activeInHierarchy)
@@ -43,6 +50,7 @@ namespace Reward
                 }
             }
 
+            // 当对象不够时尝试在池中创建新的对象
             if (expandPool)
             {
                 GameObject obj = Instantiate(rewardObjectPrefab,transform);
@@ -54,6 +62,7 @@ namespace Reward
             return null;
         }
 
+        // 回收对象
         public void ReturnRewardObject(GameObject obj)
         {
             obj.SetActive(false);

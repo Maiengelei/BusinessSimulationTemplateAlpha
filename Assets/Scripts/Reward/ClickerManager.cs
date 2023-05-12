@@ -19,13 +19,23 @@ namespace Reward
         // 奖励UI对象池
         [SerializeField] private RewardObjPool rewardObjPool;
 
-        [SerializeField] private RectTransform rectTransform;
-
-        private Vector3[] _corners = new Vector3[4];
-
+        // 屏幕区域尺寸
         private Vector3 _screenBounds;
 
+        // 玩家背包
         private InventoryObject _inventoryObject;
+        
+        // 长按多久算作一次长按
+        public float holdTime = 0.1f; 
+        
+        // 每隔多久调用一次函数
+        public float interval = 1f; 
+        
+        // 点击累计时间
+        private float _timer = 0.0f;
+        
+        // 是否在长按
+        private bool _isHolding = false;
 
         private void OnEnable()
         {
@@ -34,9 +44,6 @@ namespace Reward
 
         private void Start()
         {
-            // 获取组件在区域中的四个角
-            rectTransform.GetWorldCorners(_corners);
-
             _screenBounds =
                 Camera.main.ScreenToWorldPoint(
                     new Vector3(
@@ -45,11 +52,6 @@ namespace Reward
                         Camera.main.transform.position.z)
                 );
         }
-
-        public float holdTime = 0.1f; // 长按多久算作一次长按
-        public float interval = 1f; // 每隔多久调用一次函数
-        private float _timer = 0.0f;
-        private bool _isHolding = false;
 
         private void Update()
         {

@@ -23,7 +23,10 @@ namespace Inventory.ButtonFunction
 
         private void Start()
         {
+            // 获取 Button 组件
             _btn = GetComponent<Button>();
+            
+            // 监听 OnClick 事件
             _btn.onClick.AddListener(OnClick);
 
             _item = transform.Find("Item");

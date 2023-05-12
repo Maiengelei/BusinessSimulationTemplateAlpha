@@ -42,7 +42,10 @@ namespace Lottery.LotteryUI
         {
             foreach (var item in _lotteryList.GetLotteryList)
             {
+                // 实例化一个抽奖机中的对象
                 var itemObj = Instantiate(lotterySlotPrefab,lotteryGrid);
+                
+                // 显示这个对象
                 itemObj.transform.Find("ItemSprite").GetComponent<Image>().sprite = item.itemObject.itemSprite;
             }
         }

@@ -8,6 +8,7 @@ namespace Lottery.LotteryUI
 {
     public class CanvasLookAtPlayer : MonoBehaviour
     {
+        // 相机对象
         private Camera _cam;
 
         private void Awake()

@@ -21,8 +21,10 @@ namespace Inventory.InventoryScriptableObject
         // 更新金币事件
         public event InventoryUI UpdateMoneyUI;
 
+        // 增加宠物
         public event PetAdd PetAddList;
 
+        // 移除宠物
         public event PetRemove PetRemoveList;
 
         // -----------------------------------------------------------------------------------

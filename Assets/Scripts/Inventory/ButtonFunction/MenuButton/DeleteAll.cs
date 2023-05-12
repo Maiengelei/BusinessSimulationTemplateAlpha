@@ -11,19 +11,28 @@ namespace Inventory.ButtonFunction.MenuButton
 {
     public class DeleteAll : MonoBehaviour
     {
+        // 按钮对象
         private Button _btn;
+        
+        // 背包UI界面
         private InventoryUIManager _inventoryUIManager;
 
         private void Start()
         {
+            // 获取背包 UI 界面脚本
             _inventoryUIManager = transform.parent.parent.GetComponent<InventoryUIManager>();
 
+            // 获取 Button 组件
             _btn = GetComponent<Button>();
+            
+            // 监听 OnClick 事件
             _btn.onClick.AddListener(OnClick);
         }
 
+        // 点击事件
         private void OnClick()
         {
+            // 点击后调用方法
             _inventoryUIManager.FuncDeleteAll();
         }
     }

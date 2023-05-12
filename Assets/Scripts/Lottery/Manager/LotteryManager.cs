@@ -8,24 +8,19 @@ namespace Lottery.Manager
 {
     public class LotteryManager : MonoBehaviour
     {
-        
         // 抽奖机的UI界面 旋转父物体
         public Transform uiRotatePoint;
-
         
         // 抽奖机碰撞组件
         public LotteryTrigger colliderTrigger;
 
         // ---------------------------------------------------------------
-
         
         // 抽奖价格
         [SerializeField] private int price = 50;
-
         
         // 玩家背包
         private InventoryObject _player;
-
         
         // 抽奖机数据存储对象
         private LotteryData _lotteryData;
@@ -48,7 +43,6 @@ namespace Lottery.Manager
 
         // ---------------------------------------------------------------
 
-        
         // 当玩家进入 Trigger 时
         private void PlayerEnter(Collider other)
         {
@@ -58,7 +52,6 @@ namespace Lottery.Manager
             uiRotatePoint.gameObject.SetActive(true);
         }
 
-        
         // 当玩家离开 Trigger 时
         private void PlayerExit(Collider other)
         {
@@ -67,7 +60,6 @@ namespace Lottery.Manager
         }
 
         // ---------------------------------------------------------------
-
         
         // 向玩家背包中新增道具
         public void GetLotteryItem()

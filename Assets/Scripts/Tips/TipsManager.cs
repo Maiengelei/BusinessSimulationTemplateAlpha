@@ -1,12 +1,11 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Tips
 {
     public class TipsManager : MonoBehaviour
     {
+        // 单例
         public static TipsManager Instance;
 
         // 提示条
@@ -46,10 +45,12 @@ namespace Tips
 
         private void Update()
         {
+            // 如果tips已经启用
             if (_isEnable)
             {
                 _currentTime += Time.deltaTime;
                 
+                // 当启用时间超过原计划时间时
                 if (_currentTime >= _tipsTime)
                 {
                     CloseTips();
@@ -57,6 +58,8 @@ namespace Tips
             }
         }
 
+        // 启用Tips
+        // 如果Tips正在启用，则更新Tips文本并重置计数器
         public void AddTips(string str)
         {
             // 重置计时器
@@ -73,8 +76,10 @@ namespace Tips
             }
         }
 
+        // 关闭Tips
         private void CloseTips()
         {
+            // 如果当前Tips正在启用则关闭
             if (tipsObject.activeSelf)
             {
                 tipsText.text = "";

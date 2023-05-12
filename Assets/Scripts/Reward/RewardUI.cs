@@ -20,7 +20,7 @@ namespace Reward
         // 目标图片颜色
         private Color _targetColor;
 
-        private Coroutine _fadeCoroutine;
+        // 是否正在淡出
         private bool _isFading;
 
         // 当前计时器
