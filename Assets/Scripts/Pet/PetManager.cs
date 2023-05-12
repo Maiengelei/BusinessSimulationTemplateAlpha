@@ -3,7 +3,9 @@
  */
 
 
+using System;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
 namespace Pet
@@ -14,6 +16,18 @@ namespace Pet
         public float distance; // 预制件之间的距离
 
         private List<GameObject> _prefabList = new List<GameObject>();
+
+        private void OnEnable()
+        {
+            _player.GetComponent<GamerObjectProperties>().InventoryObject.PetAddList += CreatePrefab;
+            _player.GetComponent<GamerObjectProperties>().InventoryObject.PetRemoveList += DeletePrefab;
+        }
+
+        private void OnDestroy()
+        {
+            _player.GetComponent<GamerObjectProperties>().InventoryObject.PetAddList -= CreatePrefab;
+            _player.GetComponent<GamerObjectProperties>().InventoryObject.PetRemoveList -= DeletePrefab;
+        }
 
         private void Start()
         {
@@ -26,13 +40,13 @@ namespace Pet
         }
 
         // 用于实例化预制件并将其添加到列表中
-        public void CreatePrefab(GameObject prefabObject)
+        private void CreatePrefab(GameObject prefabObject)
         {
             // 计算新预制件的位置
             Vector3 pos = _player.transform.position + new Vector3(_prefabList.Count * distance, 0, 0);
 
             // 实例化新预制件
-            GameObject obj = Instantiate(prefabObject, pos, Quaternion.identity,transform);
+            GameObject obj = Instantiate(prefabObject, pos, Quaternion.identity, transform);
 
             // 将新预制件添加到列表中
             _prefabList.Add(obj);
@@ -48,7 +62,7 @@ namespace Pet
             }
         }
 
-        public void DeletePrefab(int index)
+        private void DeletePrefab(int index)
         {
             // 如果该元素存在
             if (index < _prefabList.Count)
