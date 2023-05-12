@@ -19,6 +19,8 @@ namespace Pet
 
         private void OnEnable()
         {
+            _player = GameObject.FindWithTag("Player");
+            
             _player.GetComponent<GamerObjectProperties>().InventoryObject.PetAddList += CreatePrefab;
             _player.GetComponent<GamerObjectProperties>().InventoryObject.PetRemoveList += DeletePrefab;
         }
@@ -27,11 +29,6 @@ namespace Pet
         {
             _player.GetComponent<GamerObjectProperties>().InventoryObject.PetAddList -= CreatePrefab;
             _player.GetComponent<GamerObjectProperties>().InventoryObject.PetRemoveList -= DeletePrefab;
-        }
-
-        private void Start()
-        {
-            _player = GameObject.FindWithTag("Player");
         }
 
         private void Update()
