@@ -51,18 +51,30 @@ namespace Reward
 
         private void Update()
         {
-            LongPress();
+            // 点击
+            ClickScreen();
         }
 
-        private void LongPress()
+        private void ClickScreen()
         {
             // 判断鼠标左键或触摸屏幕
             if (Input.GetMouseButtonDown(0))
             {
-                _isHolding = true;
-                _timer = 0.0f;
+                // 如果点击的位置没有UI
+                if (!IsPointerOverUIObject())
+                {
+                    // 单点时调用
+                    if (_isHolding == false)
+                    {
+                        GetReward();
+                    }
+                    
+                    _isHolding = true;
+                    _timer = 0.0f;
+                }
             }
 
+            // 抬起
             if (Input.GetMouseButtonUp(0))
             {
                 _isHolding = false;
