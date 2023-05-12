@@ -11,16 +11,25 @@ namespace Inventory.InventoryScriptableObject
     public class InventoryObject : ScriptableObject
     {
         /// <summary>
-        /// 创建一个委托
+        /// 创建委托
         /// </summary>
         public delegate void InventoryUI();
+        public delegate void PetAdd(GameObject obj);
+        public delegate void PetRemove(int index);
 
         /// <summary>
         /// 用于更新背包 UI 的事件
         /// </summary>
         public event InventoryUI UpdateUI;
 
+        /// <summary>
+        /// 更新金币事件
+        /// </summary>
         public event InventoryUI UpdateMoneyUI;
+
+        public event PetAdd PetAddList;
+
+        public event PetRemove PetRemoveList;
 
         // -----------------------------------------------------------------------------------
 
@@ -213,6 +222,11 @@ namespace Inventory.InventoryScriptableObject
             // 更新总值
             equippedSum = GetEquippedSum();
 
+            if (PetAddList != null)
+            {
+                PetAddList(itemList[itemID].Item.itemModelPrefab);
+            }
+
             // 重新排序并更新UI
             ListSorting();
             if (UpdateUI != null)
@@ -258,6 +272,11 @@ namespace Inventory.InventoryScriptableObject
             if (isEquippedOnValue < 0)
             {
                 isEquippedOnValue = 0;
+            }
+
+            if (PetRemoveList != null)
+            {
+                PetRemoveList(itemID);
             }
 
             // 更新总值
