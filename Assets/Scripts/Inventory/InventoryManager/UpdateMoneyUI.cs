@@ -1,8 +1,6 @@
-﻿using System;
-using Inventory.InventoryScriptableObject;
+﻿using Inventory.InventoryScriptableObject;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Inventory.InventoryManager
 {

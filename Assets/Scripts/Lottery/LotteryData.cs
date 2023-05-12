@@ -19,15 +19,10 @@ namespace Lottery
         [SerializeField] 
         List<LotteryDataBase> lotteryList;
 
-        /// <summary>
-        /// 获取列表
-        /// </summary>
+        // 获取列表
         public List<LotteryDataBase> GetLotteryList => lotteryList;
 
-        /// <summary>
-        /// 从列表中返回一个随机Item 根据权重
-        /// </summary>
-        /// <returns>Item</returns>
+        // 从列表中返回一个随机Item 根据权重
         public ItemObject GetRandomItem()
         {
             // 总权重

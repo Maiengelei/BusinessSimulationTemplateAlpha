@@ -50,9 +50,7 @@ namespace Player
             }
         }
 
-        /// <summary>
-        /// 键盘输入监控
-        /// </summary>
+        // 键盘输入监控
         private void KeyBoardMove()
         {
             if (Input.GetKey(forward) || Input.GetKey(back))
@@ -76,9 +74,7 @@ namespace Player
             characterManager.SetCharacterMove(_moveHorizontal, _moveVertical);
         }
 
-        /// <summary>
-        /// 鼠标输入关闭时
-        /// </summary>
+        // 鼠标输入关闭时
         private void MouseLookState()
         {
             if (Input.GetKey(mouseLockIn))
@@ -99,9 +95,7 @@ namespace Player
             }
         }
 
-        /// <summary>
-        /// 鼠标输入监控
-        /// </summary>
+        // 鼠标输入监控
         private void MouseMove()
         {
             // 当检测到鼠标右键按住时
@@ -120,9 +114,7 @@ namespace Player
             }
         }
 
-        /// <summary>
-        /// 键盘输入关闭时
-        /// </summary>
+        // 键盘输入关闭时
         private void KeyBoardNoMove()
         {
             if (_moveHorizontal != 0 || _moveVertical != 0)
@@ -134,10 +126,8 @@ namespace Player
             }
         }
 
-        /// <summary>
-        /// 按下跳跃键时
-        /// 未来拆分成 Skill 和 Input
-        /// </summary>
+        // 按下跳跃键时
+        // 未来拆分成 Skill 和 Input
         private void JumpKeyDown()
         {
             if (Input.GetKeyDown(jump) && characterManager.IsGround)

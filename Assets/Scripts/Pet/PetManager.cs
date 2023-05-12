@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Inventory.InventoryScriptableObject;
 using Player;
 using UnityEngine;
@@ -73,8 +72,7 @@ namespace Pet
                 // 进行补位，使得所有宠物保持合理的位置
                 for (int i = index; i < pets.Count; i++)
                 {
-                    // 为了简单起见，这里仅仅是将每个宠物向前移动一个单位
-                    // 在实际游戏中，可能需要更复杂的补位算法，例如寻找一个没有其他宠物的位置
+                    // 将每个宠物向前移动一个单位
                     pets[i].transform.position -= pets[i].transform.forward;
                 }
             }

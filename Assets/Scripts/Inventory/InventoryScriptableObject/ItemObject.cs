@@ -5,29 +5,19 @@ namespace Inventory.InventoryScriptableObject
     [CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item")]
     public class ItemObject : ScriptableObject
     {
-        /// <summary>
-        /// 道具名称
-        /// </summary>
+        // 道具名称
         public string itemName;
 
-        /// <summary>
-        /// 道具图标
-        /// </summary>
+        // 道具图标
         public Sprite itemSprite;
 
-        /// <summary>
-        /// 道具加成值(Max)
-        /// </summary>
+        // 道具加成值(Max)
         public int itemValueMax;
 
-        /// <summary>
-        /// 道具加成值(Min)
-        /// </summary>
+        // 道具加成值(Min)
         public int itemValueMin;
 
-        /// <summary>
-        /// 道具对应模型
-        /// </summary>
+        // 道具对应模型
         public GameObject itemModelPrefab;
     }
 }

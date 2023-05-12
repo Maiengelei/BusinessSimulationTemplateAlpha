@@ -1,3 +1,7 @@
+/*
+ * 让抽奖机的屏幕UI始终对准玩家
+ */
+
 using UnityEngine;
 
 namespace Lottery.LotteryUI

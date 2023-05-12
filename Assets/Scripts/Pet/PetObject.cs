@@ -6,7 +6,7 @@ namespace Pet
 {
     public class PetObject : MonoBehaviour
     {
-        // 这是玩家的引用，宠物需要追踪的目标
+        // 宠物需要追踪的目标
         public Transform player;
         // 追踪玩家的速度
         public float speed = 2.0f;

@@ -1,24 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SlotData : MonoBehaviour
 {
-    /// <summary>
-    /// 道具图标
-    /// </summary>
+    // 道具图标
     [SerializeField] public Image itemImage;
 
-    /// <summary>
-    /// 道具属性
-    /// </summary>
+    // 道具属性
     [SerializeField] public TextMeshProUGUI itemValue;
 
-    /// <summary>
-    /// 道具格子编号
-    /// </summary>
+    // 道具格子编号
     public int gridSlotConst;
 
     private void Awake()

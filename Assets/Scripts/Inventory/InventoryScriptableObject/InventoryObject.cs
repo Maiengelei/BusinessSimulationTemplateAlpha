@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Inventory.InventoryData;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random; // 命名空间冲突，使用 Using 解决冲突
 
 namespace Inventory.InventoryScriptableObject
@@ -10,21 +9,15 @@ namespace Inventory.InventoryScriptableObject
     [CreateAssetMenu(fileName = "NewInventory", menuName = "Inventory/Inventory")]
     public class InventoryObject : ScriptableObject
     {
-        /// <summary>
-        /// 创建委托
-        /// </summary>
+        // 创建委托
         public delegate void InventoryUI();
         public delegate void PetAdd(GameObject obj);
         public delegate void PetRemove(int index);
 
-        /// <summary>
-        /// 用于更新背包 UI 的事件
-        /// </summary>
+        // 用于更新背包 UI 的事件
         public event InventoryUI UpdateUI;
 
-        /// <summary>
-        /// 更新金币事件
-        /// </summary>
+        // 更新金币事件
         public event InventoryUI UpdateMoneyUI;
 
         public event PetAdd PetAddList;
@@ -33,43 +26,28 @@ namespace Inventory.InventoryScriptableObject
 
         // -----------------------------------------------------------------------------------
 
-        /// <summary>
-        /// 玩家的钱
-        /// </summary>
+        // 玩家的钱
         [SerializeField] private int money;
 
-        /// <summary>
-        /// 背包最大空间
-        /// </summary>
+        // 背包最大空间
         public int inventoryLenght = 18;
 
-        /// <summary>
-        /// 允许装备的最大数量
-        /// </summary>
+        // 允许装备的最大数量
         public int isEquippedValue = 3;
 
-        /// <summary>
-        /// 当前已经装备的装备数量
-        /// </summary>
+        // 当前已经装备的装备数量
         public int isEquippedOnValue;
 
-        /// <summary>
-        /// 已装备的道具总数值
-        /// </summary>
+        // 已装备的道具总数值
         public int equippedSum;
 
-        /// <summary>
-        /// 背包列表 List
-        /// </summary>
+        // 背包列表 List
         public List<InventoryList<ItemObject, ItemAttributes>>
             itemList = new List<InventoryList<ItemObject, ItemAttributes>>();
 
         // -----------------------------------------------------------------------------------
 
-        /// <summary>
-        /// 检查该背包是否已经满了
-        /// </summary>
-        /// <returns>背包已满时 False</returns>
+        // 检查该背包是否已经满了
         public bool CheckItemList()
         {
             // 如果当前列表中的值是否超过上限
@@ -78,10 +56,8 @@ namespace Inventory.InventoryScriptableObject
             return false;
         }
 
-        /// <summary>
-        /// 重新排序列表
-        /// 按照 已装备 未装备 分组
-        /// </summary>
+        // 重新排序列表
+        // 按照 已装备 未装备 分组
         public void ListSorting()
         {
             itemList = itemList
@@ -90,10 +66,7 @@ namespace Inventory.InventoryScriptableObject
                 .ToList();
         }
 
-        /// <summary>
-        /// 向背包中增加道具
-        /// </summary>
-        /// <param name="itemObject">要增加的道具</param>
+        // 向背包中增加道具
         public void AddItemToList(ItemObject itemObject)
         {
             // 检查列表是否已经满了
@@ -124,10 +97,7 @@ namespace Inventory.InventoryScriptableObject
             }
         }
 
-        /// <summary>
-        /// 移除列表中的某个元素
-        /// </summary>
-        /// <param name="itemID">列表元素ID，一般来说与背包的格子顺序ID相同</param>
+        // 移除列表中的某个元素
         public void RemoveItemToList(int itemID)
         {
             // 检查元素是否存在于 List
@@ -159,9 +129,7 @@ namespace Inventory.InventoryScriptableObject
             }
         }
 
-        /// <summary>
-        /// 移除列表中所有 IsEquipped 为 False 的元素
-        /// </summary>
+        // 移除列表中所有 IsEquipped 为 False 的元素
         public void RemoveItemToListAll()
         {
             itemList.RemoveAll(inventoryList => inventoryList.Attributes.IsEquipped == false);
@@ -173,10 +141,7 @@ namespace Inventory.InventoryScriptableObject
             }
         }
 
-        /// <summary>
-        /// 装备指定的道具
-        /// </summary>
-        /// <param name="itemID">道具ID，一般 UI 格子排序就是 List 排序</param>
+        // 装备指定的道具
         public void IsEquippedOn(int itemID)
         {
             // 检查元素是否存在于 List
@@ -235,10 +200,7 @@ namespace Inventory.InventoryScriptableObject
             }
         }
 
-        /// <summary>
-        /// 解除装备指定的道具
-        /// </summary>
-        /// <param name="itemID">道具ID，一般 UI 格子排序就是 List 排序</param>
+        // 解除装备指定的道具
         public void IsEquippedOff(int itemID)
         {
             // 检查元素是否存在于 List
@@ -290,10 +252,7 @@ namespace Inventory.InventoryScriptableObject
             }
         }
 
-        /// <summary>
-        /// 查找已经装备的道具
-        /// </summary>
-        /// <returns>返回 List，若没有装备道具则 List 长度为 0</returns>
+        // 查找已经装备的道具
         public List<InventoryList<ItemObject, ItemAttributes>> GetIsEquippedItemList()
         {
             // 构造临时 List
@@ -313,9 +272,7 @@ namespace Inventory.InventoryScriptableObject
             return items;
         }
 
-        /// <summary>
-        /// 获取背包中所有已装备的道具的值的总和
-        /// </summary>
+        // 获取背包中所有已装备的道具的值的总和
         private int UpdateEquippedSum()
         {
             int sum = 0;
@@ -331,10 +288,7 @@ namespace Inventory.InventoryScriptableObject
             return sum;
         }
 
-        /// <summary>
-        /// 增加金钱
-        /// </summary>
-        /// <param name="money">金钱</param>
+        // 增加金钱
         public void AddMoney(int money)
         {
             this.money += money;
@@ -345,11 +299,7 @@ namespace Inventory.InventoryScriptableObject
             }
         }
 
-        /// <summary>
-        /// 减少金钱
-        /// </summary>
-        /// <param name="money">金钱</param>
-        /// <returns>是否减少成功</returns>
+        // 减少金钱
         public bool ReduceMoney(int money)
         {
             if (this.money >= money)
@@ -367,10 +317,7 @@ namespace Inventory.InventoryScriptableObject
             return false;
         }
 
-        /// <summary>
-        /// 获取当前金钱值
-        /// </summary>
-        /// <returns>金钱值</returns>
+        // 获取当前金钱值
         public int GetMoney()
         {
             return money;

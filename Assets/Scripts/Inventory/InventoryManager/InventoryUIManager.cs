@@ -6,24 +6,16 @@ namespace Inventory.InventoryManager
 {
     public class InventoryUIManager : MonoBehaviour
     {
-        /// <summary>
-        /// 对应背包
-        /// </summary>
+        // 对应背包
         private InventoryObject _inventoryObject;
 
-        /// <summary>
-        /// 点击的格子ID
-        /// </summary>
+        // 点击的格子ID
         private int _slotListID;
 
-        /// <summary>
-        /// 生成的数据参考，用于承载显示在界面中的内容
-        /// </summary>
+        // 生成的数据参考，用于承载显示在界面中的内容
         private SlotData _slotData;
 
-        /// <summary>
-        /// 格子父类
-        /// </summary>
+        // 格子父类
         [SerializeField] private Transform grid;
 
         // -----------------------------------------------------------------------------------
@@ -53,9 +45,7 @@ namespace Inventory.InventoryManager
 
         // -----------------------------------------------------------------------------------
 
-        /// <summary>
-        /// 根据指定的列表进行更新数据
-        /// </summary>
+        // 根据指定的列表进行更新数据
         private void UpdateItem()
         {
             // 将所有的子物体取消激活
@@ -92,10 +82,7 @@ namespace Inventory.InventoryManager
             }
         }
         
-        /// <summary>
-        /// 检查点击的格子状态，修改点击状态
-        /// </summary>
-        /// <param name="gridSlotConst"></param>
+        // 检查点击的格子状态，修改点击状态
         public void CheckSlot(int gridSlotConst)
         {
             // 检查上一个物品栏，如果正在高亮则取消高亮上一个物品栏
@@ -109,11 +96,7 @@ namespace Inventory.InventoryManager
 
         }
 
-        /// <summary>
-        /// 高亮/取消高亮一个的物品栏
-        /// </summary>
-        /// <param name="slotListID">指定的格子ID</param>
-        /// <param name="condition">指定的状态</param>
+        // 高亮/取消高亮一个的物品栏
         private void CheckSlotFrame(int slotListID, bool condition = true)
         {
             // 关闭

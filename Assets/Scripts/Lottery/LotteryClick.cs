@@ -1,7 +1,5 @@
-using System;
 using Lottery.Manager;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Lottery

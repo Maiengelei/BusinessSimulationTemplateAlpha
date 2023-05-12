@@ -9,9 +9,6 @@ using UnityEngine.UI;
 
 namespace Inventory.ButtonFunction.MenuButton
 {
-    /// <summary>
-    /// 背包界面的删除道具功能
-    /// </summary>
     public class Delete : MonoBehaviour
     {
         private Button _btn;

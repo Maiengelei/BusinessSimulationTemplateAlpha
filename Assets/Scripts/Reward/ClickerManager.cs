@@ -10,19 +10,13 @@ namespace Reward
 {
     public class ClickerManager : MonoBehaviour
     {
-        /// <summary>
-        /// 奖励值
-        /// </summary>
+        // 奖励值
         [SerializeField] private int rewardValue;
 
-        /// <summary>
-        /// 玩家背包
-        /// </summary>
+        // 玩家背包
         [SerializeField] private InventoryObject inventoryObject;
 
-        /// <summary>
-        /// 奖励UI对象池
-        /// </summary>
+        // 奖励UI对象池
         [SerializeField] private RewardObjPool rewardObjPool;
 
         [SerializeField] private RectTransform rectTransform;
@@ -120,9 +114,7 @@ namespace Reward
         }
 
 
-        /// <summary>
-        /// 获取一次奖励
-        /// </summary>
+        // 获取一次奖励
         public void GetReward()
         {
             inventoryObject.AddMoney(rewardValue + _inventoryObject.GetEquippedSum());

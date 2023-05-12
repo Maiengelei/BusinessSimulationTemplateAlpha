@@ -32,10 +32,7 @@ namespace Reward
             }
         }
 
-        /// <summary>
-        /// 构建对象池
-        /// </summary>
-        /// <returns>目标对象</returns>
+        // 构建对象池
         public GameObject GetRewardObject()
         {
             for (int i = 0; i < _pooledObjects.Count; i++)
