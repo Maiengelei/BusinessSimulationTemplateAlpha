@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8790312641566202270}
   - component: {fileID: 8790312641566202266}
   - component: {fileID: 8790312641566202265}
+  - component: {fileID: 4686267723510305947}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -150,6 +151,24 @@ MonoBehaviour:
   hitLayerMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &4686267723510305947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790312641566202268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206e93dcfff7404ba8cc834fd2d2d85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardValue: 100
+  inventoryObject: {fileID: 11400000, guid: 79361d5784b139e458df4707fb03f475, type: 2}
+  rewardObjPool: {fileID: 0}
+  rectTransform: {fileID: 0}
+  holdTime: 0.1
+  interval: 0.5
 --- !u!1 &8790312641611421794
 GameObject:
   m_ObjectHideFlags: 0
