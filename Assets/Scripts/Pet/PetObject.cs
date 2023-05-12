@@ -15,6 +15,9 @@ namespace Pet
         
         // 与玩家保持的最小距离
         public float minimumDistanceFromPlayer = 1.5f;
+        
+        // 在地面以上的最小高度
+        public float minimumHeightAboveGround = 0.5f;
 
         // 宠物管理器
         public PetManager petManager;
@@ -55,6 +58,18 @@ namespace Pet
                             // 从其他宠物方向向后移动
                             transform.position -= (otherPet.transform.position - transform.position).normalized * (distanceFromOthers - distance);
                         }
+                    }
+                }
+                
+                // 发射一个从宠物向下的射线
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, -transform.up, out hit))
+                {
+                    // 如果射线碰到了地面，且宠物太接近地面
+                    if (hit.distance < minimumHeightAboveGround)
+                    {
+                        // 将宠物向上移动一些距离，使其离地面有一定的高度
+                        transform.position += transform.up * (minimumHeightAboveGround - hit.distance);
                     }
                 }
             }
