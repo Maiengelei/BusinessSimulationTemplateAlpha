@@ -1,3 +1,8 @@
+/*
+ * 背包界面的按钮功能
+ * 删除所有未装备的道具
+ */
+
 using Inventory.InventoryManager;
 using UnityEngine;
 using UnityEngine.UI;
