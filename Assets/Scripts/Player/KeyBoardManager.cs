@@ -111,6 +111,7 @@ namespace Player
             else
             {
                 Cursor.lockState = CursorLockMode.None; // 解锁鼠标指针
+                characterManager.SetCameraRotate(0, 0);
             }
         }
 
