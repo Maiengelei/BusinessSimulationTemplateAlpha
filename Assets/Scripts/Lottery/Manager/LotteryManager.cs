@@ -1,5 +1,6 @@
 ﻿using Inventory.InventoryScriptableObject;
 using Player;
+using Tips;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -83,11 +84,13 @@ namespace Lottery.Manager
                 else
                 {
                     Debug.Log($"你的背包满了，背包最大容量为{_player.inventoryLenght}");
+                    TipsManager.Instance.AddTips($"Your backpack is full. The maximum capacity of the backpack is {_player.inventoryLenght}.");
                 }
             }
             else
             {
-                Debug.Log($"你的钱不够");
+                Debug.Log($"你的钱不够，需要{price}个金币，你有{_player.GetMoney()}个金币");
+                TipsManager.Instance.AddTips($"You don't have enough money. It costs {price} gold coins, and you only have {_player.GetMoney()} gold coins.");
             }
         }
     }

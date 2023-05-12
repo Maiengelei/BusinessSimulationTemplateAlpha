@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Inventory.InventoryData;
+using Tips;
 using UnityEngine;
 using Random = UnityEngine.Random; // 命名空间冲突，使用 Using 解决冲突
 
@@ -103,18 +104,13 @@ namespace Inventory.InventoryScriptableObject
             // 检查元素是否存在于 List
             if (itemID >= itemList.Count || itemID < 0)
             {
-#if UNITY_EDITOR
-                Debug.Log($"元素 {itemID} 不存在");
-#endif
                 return;
             }
 
             // 检查元素是否正在装备
             if (itemList[itemID].Attributes.IsEquipped)
             {
-#if UNITY_EDITOR
-                Debug.Log($"元素 {itemID} 正在装备中");
-#endif
+                TipsManager.Instance.AddTips($"宠物正在装备中");
                 return;
             }
 
@@ -147,27 +143,19 @@ namespace Inventory.InventoryScriptableObject
             // 检查元素是否存在于 List
             if (itemID >= itemList.Count || itemID < 0)
             {
-#if UNITY_EDITOR
-                Debug.Log($"元素 {itemID} 不存在");
-#endif
                 return;
             }
 
             // 检查元素是否正在装备
             if (itemList[itemID].Attributes.IsEquipped)
             {
-#if UNITY_EDITOR
-                Debug.Log($"元素 {itemID} 正在装备中");
-#endif
                 return;
             }
 
             // 判断装备栏是否满了
             if (isEquippedOnValue >= isEquippedValue)
             {
-#if UNITY_EDITOR
-                Debug.Log($"装备栏满了");
-#endif
+                TipsManager.Instance.AddTips($"Your available equipment slots are already full.");
                 return;
             }
 
