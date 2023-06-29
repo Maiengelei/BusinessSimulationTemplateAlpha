@@ -43,6 +43,9 @@ namespace Player
         private RaycastHit _hit; // 射线检测
         private float _outDistance; // 最终输出的相机距离
 
+        // 动画配置
+        public Animator animator; // 动画控制器
+
 
         // ---------------------------- 访问 ----------------------------
         public bool IsJump
@@ -77,11 +80,13 @@ namespace Player
             // 检查是否有命中特定的层级
             _isGround = Physics.Raycast(groundCheck.transform.position, -groundCheck.transform.up, groundHitDistance,
                 groundLayerMask);
+            animator.SetBool("IsGround", _isGround);
 
             // 当角色在地面上时，给高度 -2f ，防止角色在地上弹起导致地面射线判定失效或者物理引擎击飞
             if (_isGround && _heightDirection.y < 0)
             {
                 _heightDirection.y = -2f;
+                animator.SetBool("Jump", false);
             }
         }
 
@@ -112,6 +117,7 @@ namespace Player
             {
                 _isJump = false;
                 _heightDirection.y += Mathf.Sqrt(jumpHeight * -3.0f * _gravity);
+                animator.SetBool("Jump", true);
             }
 
             // 计算玩家跳跃
@@ -119,6 +125,7 @@ namespace Player
 
             // 角色移动
             _character.Move(_heightDirection * Time.deltaTime);
+            animator.SetFloat("Forward", Mathf.Lerp(animator.GetFloat("Forward"), _moveDirection.magnitude, 0.5f));
         }
 
         private void CameraMove()
