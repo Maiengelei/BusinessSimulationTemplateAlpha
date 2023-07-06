@@ -16,4 +16,4 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 2a4c9b75751e9854d86c26b22469c43b, type: 3}
   itemValueMax: 10
   itemValueMin: 5
-  itemModelPrefab: {fileID: 2805678058743026693, guid: 9cf981034534b454a8bfe025bec0d4bf, type: 3}
+  itemModelPrefab: {fileID: 5962498898193130904, guid: de58700b093d40649b19ad94d1545eb1, type: 3}
