@@ -40,6 +40,7 @@ namespace Player
         private Vector2 _viewRotation; // 相机输入轴
         private float _yaw; // 绕Y轴的旋转角度 
         private float _pitch; // 绕X轴的旋转角度
+        private Vector3 _currentVelocity = Vector3.zero;
         private RaycastHit _hit; // 射线检测
         private float _outDistance; // 最终输出的相机距离
 
@@ -159,7 +160,7 @@ namespace Player
             Vector3 targetPosition = cameraFollow.position + rotation * Vector3.back * _outDistance;
 
             // 平滑移动相机
-            cam.transform.position = Vector3.Lerp(cam.transform.position, targetPosition, smoothSpeed);
+            cam.transform.position = Vector3.SmoothDamp(cam.transform.position, targetPosition,ref _currentVelocity, smoothSpeed);
             cam.transform.LookAt(cameraFollow); // 朝向目标物体
         }
 
