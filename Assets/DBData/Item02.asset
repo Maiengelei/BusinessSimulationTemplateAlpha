@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Item02
   m_EditorClassIdentifier: 
   itemName: Item02
-  itemSprite: {fileID: 21300000, guid: 2a4c9b75751e9854d86c26b22469c43b, type: 3}
+  itemSprite: {fileID: 21300000, guid: 19c8e052ef8dd914ea721f86564a7bcc, type: 3}
   itemValueMax: 10
   itemValueMin: 5
-  itemModelPrefab: {fileID: 5962498898193130904, guid: de58700b093d40649b19ad94d1545eb1, type: 3}
+  itemModelPrefab: {fileID: 5461377467155698193, guid: 0461eb81aa2fb9d488e25c78591f0c6a, type: 3}
